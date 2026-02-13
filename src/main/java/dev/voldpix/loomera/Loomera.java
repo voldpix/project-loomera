@@ -108,7 +108,7 @@ public class Loomera {
         if (path.length() > 1 && path.endsWith("/")) path = path.substring(0, path.length() - 1);
 
         RequestContext context = null;
-        try (exchange) {
+        try {
             var matchedRoute = findMatchingRoute(method, path);
             if (matchedRoute == null) {
                 send404(exchange);
@@ -123,6 +123,8 @@ public class Loomera {
             }
         } catch (Exception e) {
             handleException(exchange, context, e);
+        } finally {
+            exchange.close();
         }
     }
 
