@@ -49,6 +49,13 @@ public class Loomera {
         return this;
     }
 
+    public void setJsonProvider(JsonProvider provider) {
+        if (Objects.isNull(provider)) {
+            throw new IllegalArgumentException("json provider cannot be null");
+        }
+        LoomeraContext.setJsonProvider(provider);
+    }
+
     // exceptions
     public <T extends Exception> void exception(Class<T> exceptionClass, ExceptionHandler<T> handler) {
         exceptionHandlers.put(exceptionClass, handler);
